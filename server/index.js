@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const { OpenAI } = require("openai");
 
 const api_key = "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";
+// https://platform.openai.com/account/api-keys
+// need to create new API Key before each commit
 
 const openai = new OpenAI({
   apiKey: api_key
