@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 const { OpenAI } = require("openai");
 
-const api_key = "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";
+const api_key = "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";
 // https://platform.openai.com/account/api-keys
 // need to create new API Key before each commit
 
@@ -42,6 +42,32 @@ app.post("/detail", async (req, res) => {
 }
   console.log(image);
   res.json({ message: image.data });
+});
+
+app.post("/text", async (req, res) => {
+  const receivedData = req.body.data; // This will contain the JSON data sent in the request
+  console.log(receivedData)
+  var message;
+
+  try{
+    message = await openai.chat.completions.create({
+      messages: [{ role: "user", content: `${receivedData}` }],
+      model: "gpt-3.5-turbo",
+    });  
+  }
+  catch{
+    message = {
+      choices: [
+        {
+          message:{ content: 'Invalid Input'}
+        }
+      ]
+    };;
+}
+  console.log(message.choices[0].message.content);
+  const messageContent = message.choices[0].message.content;
+  const jsonString = JSON.stringify(messageContent);
+  res.json({ message: jsonString });
 });
 
 app.get("/api", (req, res) => {
