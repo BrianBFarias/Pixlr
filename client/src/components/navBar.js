@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './navBar.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 function Navbar() {
-
+  const location = useLocation();
   const [selectedLink, setSelectedLink] = useState('pic');
 
-  const handleLinkClick = (id) => {
-    setSelectedLink(id);
-  }
+  useEffect(() => {
+    const pathname = location.pathname;
+    if (pathname.endsWith('/chat')) {
+      setSelectedLink('chat');
+    } else {
+      setSelectedLink('pic');
+    }
+  }, [location]);
 
   return (
     <>
@@ -19,7 +24,6 @@ function Navbar() {
             to='/'
             id='pic'
             className={selectedLink === 'pic' ? 'nav-links-sel' : 'nav-links'}
-            onClick={() => handleLinkClick('pic')}
           >
             <h1>PicBot</h1>
           </Link>
@@ -27,7 +31,6 @@ function Navbar() {
             to='/chat'
             id='chat'
             className={selectedLink === 'chat' ? 'nav-links-sel' : 'nav-links'}
-            onClick={() => handleLinkClick('chat')}
           >
             <h1>ChatBot</h1>
           </Link>

@@ -13,7 +13,7 @@ const random4 = randomValueInRange(0.2, 1.8);
 
 function ChatPage() {
   var i=0;
-  const speed = 30;
+  const speed = 15;
 
   const box = document.querySelector('#output');
 
