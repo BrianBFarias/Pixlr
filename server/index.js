@@ -3,15 +3,16 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const config = require('./config.json'); // Load the configuration file
+
 
 const { OpenAI } = require("openai");
 
-const api_key = "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";
 // https://platform.openai.com/account/api-keys
 // need to create new API Key before each commit
 
 const openai = new OpenAI({
-  apiKey: api_key
+  apiKey: config.openaiApiKey
 });
 
 const PORT = process.env.PORT || 8080;
